@@ -1,0 +1,61 @@
+{
+  "apiVersion": "v1",
+  "propertyAddress": {
+    "street": "1011 Rosegold St",
+    "city": "Franklin Square",
+    "state": "NY",
+    "zip": "11010"
+  },
+  "person": {
+    "name": {
+      "first": "john",
+      "last": "doe"
+    },
+    "litigator": false,
+    "emails": [
+      {
+        "email": "john.doe@example.com"
+      }
+    ],
+    "phoneNumbers": [
+      {
+        "number": "1111111111",
+        "carrier": "OMNIPOINT COMMUNICATIONS- INC.",
+        "type": "Mobile",
+        "tested": true,
+        "reachable": true,
+        "score": 100
+      },
+      {
+        "number": "2222222222",
+        "carrier": "VERIZON NEW YORK- INC.",
+        "type": "Land Line",
+        "tested": false,
+        "reachable": false,
+        "score": 95
+      },
+      {
+        "number": "3333333333",
+        "carrier": "VERIZON NEW YORK- INC.",
+        "type": "Land Line",
+        "tested": true,
+        "reachable": true,
+        "score": 90
+      },
+      {
+        "number": "4444444444",
+        "carrier": "VERIZON NEW YORK- INC.",
+        "type": "Land Line",
+        "tested": true,
+        "reachable": true,
+        "score": 85
+      }
+    ],
+    "propertyAddress": {
+      "street": "1011 Rosegold St",
+      "city": "Franklin Square",
+      "state": "NY",
+      "zip": "11010"
+    }
+  }
+}

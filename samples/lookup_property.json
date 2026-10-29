@@ -1,0 +1,38 @@
+{
+  "_id": "76ef71f2bc0c999e87592cd8302c5d32",
+  "address": {
+    "street": "26823 N 31st Dr",
+    "city": "Phoenix",
+    "state": "AZ",
+    "zip": "85083",
+    "county": "Maricopa",
+    "latitude": 33.728785,
+    "longitude": -112.126019,
+    "hash": "fae16e6adfaf0bb0f306ba89bf7b4c1e"
+  },
+  "owner": {
+    "fullName": "Kyle Anderson; Rhonda K Anderson"
+  },
+  "valuation": {
+    "estimatedValue": 449821,
+    "equityPercent": 100
+  },
+  "ids": {
+    "apn": "205-03-224"
+  },
+  "building": {
+    "livingAreaSquareFeet": 1761,
+    "yearBuilt": 2001
+  },
+  "general": {
+    "propertyTypeCategory": "Residential",
+    "propertyTypeDetail": "Single Family"
+  },
+  "lot": {
+    "lotSizeAcres": 0.14637281910009184
+  },
+  "tax": {
+    "taxAmount": 19,
+    "taxYear": 2023
+  }
+}

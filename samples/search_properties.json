@@ -1,0 +1,33 @@
+{
+  "_id": "5c2b4e5fdca9199c5e2a041c2e8166e1",
+  "address": {
+    "street": "4522 W Ravina Ln",
+    "city": "Phoenix",
+    "state": "AZ",
+    "zip": "85086",
+    "county": "Maricopa",
+    "latitude": 33.867445,
+    "longitude": -112.157639,
+    "hash": "94d976d3a42b939e67c4015ee1a95f44"
+  },
+  "owner": {
+    "fullName": "4522 W RAVINA LLC"
+  },
+  "valuation": {
+    "estimatedValue": 567493,
+    "equityPercent": 100
+  },
+  "listing": {
+    "status": "Off Market",
+    "bedroomCount": 5,
+    "bathroomCount": 3,
+    "yearBuilt": 2005
+  },
+  "ids": {
+    "apn": "203-04-206"
+  },
+  "searchMeta": {
+    "resultCount": 1,
+    "resultsFound": 1
+  }
+}

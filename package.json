@@ -1,0 +1,30 @@
+{
+  "name": "batchdata",
+  "version": "0.2.0",
+  "description": "BatchData property data, skip tracing, address verification and phone compliance checks for Zapier.",
+  "main": "index.js",
+  "license": "MIT",
+  "author": "BatchData <support@batchservice.com>",
+  "homepage": "https://batchdata.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/batchdataco/batchdata-zapier.git"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "test:zapier": "zapier-platform test",
+    "validate": "zapier-platform validate",
+    "samples": "node scripts/make-samples.js ../fixtures"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "zapier-platform-core": "19.2.1"
+  },
+  "devDependencies": {
+    "zapier-platform-cli": "19.2.1",
+    "nock": "^13.5.0"
+  },
+  "private": true
+}
