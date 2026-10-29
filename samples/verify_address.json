@@ -1,0 +1,18 @@
+{
+  "street": "2800 N 24th St",
+  "city": "Phoenix",
+  "state": "AZ",
+  "zip": "85008",
+  "zipPlus4": "1049",
+  "county": "Maricopa",
+  "countyFipsCode": "04013",
+  "hash": "90a01b18e3834e349a8d1d07d7e086ba",
+  "latitude": 33.47865,
+  "longitude": -112.03029,
+  "vacant": "No",
+  "carrierRoute": "C009",
+  "meta": {
+    "error": false,
+    "normalized": true
+  }
+}
