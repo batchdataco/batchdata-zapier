@@ -4,7 +4,7 @@ Zapier integration for the [BatchData](https://batchdata.io) API. It covers prop
 
 Support: support@batchservice.com
 
-> **Status: v0.2.0, not yet pushed to Zapier.** It passes `zapier-platform validate` and its local tests. Most operations were smoke-tested live; monitors and the instant trigger were not (see [What was and was not verified](#what-was-and-was-not-verified)).
+> **Status: v0.3.0, pushed to Zapier as a private integration (app 248744), not yet submitted for public review.** It passes `zapier-platform validate` with no errors or warnings and its local tests. Most operations were smoke-tested live; monitors and the instant trigger were not (see [What was and was not verified](#what-was-and-was-not-verified)).
 
 ![BatchData](logo.png)
 
@@ -125,9 +125,9 @@ npx zapier-platform login               # interactive; or export ZAPIER_DEPLOY_K
 npx zapier-platform register "BatchData"   # first time only; creates .zapierapprc (commit it)
 npx zapier-platform validate
 npm test
-npx zapier-platform push                # uploads the version in package.json (0.2.0)
+npx zapier-platform push                # uploads the version in package.json (0.3.0)
 npx zapier-platform invite you@example.com   # optional: test with a few users first
-npx zapier-platform promote 0.2.0       # starts review for public listing
+npx zapier-platform promote 0.3.0       # starts review for public listing
 ```
 
 Before promoting: add a test account (a sandbox API token from app.batchdata.com, which returns mock data at no cost), and review the listing text in the Zapier editor. The icon is `logo.png` (256x256, from the official BatchData logo). The first push must use a version that is not already live.
@@ -138,7 +138,7 @@ Verified live against the production API with the real token (1 record per call)
 
 Not verified live (mocked only): property monitors and the instant trigger. The production token used gets 403 on the subscription endpoints. A sandbox token or a token with that ability is needed to verify create, list, delete and event delivery. The webhook delivery shape follows the BatchData product documentation.
 
-Tests: unit tests with mocked HTTP cover request shape, response mapping, guards and hooks. `zapier-platform validate` passes with no errors (warnings only).
+Tests: unit tests with mocked HTTP cover request shape, response mapping, guards and hooks (`npm test`). An opt-in live smoke test calls each module once against the real API (`BATCHDATA_API_TOKEN=... npm run test:live`; calls are billed). `zapier-platform validate` passes with no errors, publishing tasks or warnings. See PUBLISH-CHECKLIST.md for the steps that need the Zapier web UI.
 
 **Connection test.** `POST /api/v1/address/verify` with an empty `requests` array returns HTTP 400 ("The requests field is required.") for a valid token. Whether a rejected request is billed could not be proven; there is no zero-cost check for production tokens.
 

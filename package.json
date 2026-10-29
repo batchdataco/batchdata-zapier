@@ -1,6 +1,6 @@
 {
   "name": "batchdata",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "BatchData property data, skip tracing, address verification and phone compliance checks for Zapier.",
   "main": "index.js",
   "license": "MIT",
@@ -13,6 +13,7 @@
   "scripts": {
     "test": "node --test test/*.test.js",
     "test:zapier": "zapier-platform test",
+    "test:live": "LIVE=1 node --test test/live.test.js",
     "validate": "zapier-platform validate",
     "samples": "node scripts/make-samples.js ../fixtures"
   },
