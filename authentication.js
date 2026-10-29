@@ -50,8 +50,13 @@ module.exports = {
       type: 'password',
       required: true,
       helpText:
-        'Create an API token in your BatchData account (BatchData dashboard > API). Use a token with access to the endpoints you plan to use. Each request is billed to your account.',
+        'Create an API token in your BatchData account (BatchData dashboard > API). See [the BatchData developer docs](https://developer.batchdata.com). Use a token with access to the endpoints you plan to use. Each request is billed to your account.',
     },
   ],
   test,
+  // The test response carries no account identity, so label by the token's last 4 characters.
+  connectionLabel: (z, bundle) => {
+    const key = String((bundle.authData && bundle.authData.api_key) || '');
+    return key.length >= 8 ? `Token ending ${key.slice(-4)}` : 'BatchData API token';
+  },
 };
