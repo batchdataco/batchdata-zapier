@@ -79,3 +79,16 @@ test('authentication has a label, help text with a link, and the connection labe
   assert.equal(label, 'Token ending 5678');
   assert.ok(!label.includes('abcdefgh'));
 });
+
+test('property monitor modules are hidden and every other module is visible', () => {
+  const app = require('../index');
+  const hidden = [];
+  const visible = [];
+  for (const group of ['triggers', 'searches', 'creates']) {
+    for (const module of Object.values(app[group])) {
+      (module.display.hidden ? hidden : visible).push(module.key);
+    }
+  }
+  assert.deepEqual(hidden.sort(), ['create_monitor', 'delete_monitor', 'get_monitor', 'monitor_event', 'new_monitor']);
+  assert.equal(visible.length, 30);
+});

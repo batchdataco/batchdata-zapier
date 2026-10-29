@@ -4,7 +4,7 @@ Zapier integration for the [BatchData](https://batchdata.io) API. It covers prop
 
 Support: support@batchservice.com
 
-> **Status: v0.3.0, pushed to Zapier as a private integration (app 248744), not yet submitted for public review.** It passes `zapier-platform validate` with no errors or warnings and its local tests. Most operations were smoke-tested live; monitors and the instant trigger were not (see [What was and was not verified](#what-was-and-was-not-verified)).
+> **Status: v0.4.0, pushed to Zapier as a private integration (app 248744), not yet submitted for public review.** It passes `zapier-platform validate` with no errors or warnings and its local tests. Most operations were smoke-tested live; monitors and the instant trigger were not (see [What was and was not verified](#what-was-and-was-not-verified)).
 
 ![BatchData](logo.png)
 
@@ -125,9 +125,9 @@ npx zapier-platform login               # interactive; or export ZAPIER_DEPLOY_K
 npx zapier-platform register "BatchData"   # first time only; creates .zapierapprc (commit it)
 npx zapier-platform validate
 npm test
-npx zapier-platform push                # uploads the version in package.json (0.3.0)
+npx zapier-platform push                # uploads the version in package.json (0.4.0)
 npx zapier-platform invite you@example.com   # optional: test with a few users first
-npx zapier-platform promote 0.3.0       # starts review for public listing
+npx zapier-platform promote 0.4.0       # starts review for public listing
 ```
 
 Before promoting: add a test account (a sandbox API token from app.batchdata.com, which returns mock data at no cost), and review the listing text in the Zapier editor. The icon is `logo.png` (256x256, from the official BatchData logo). The first push must use a version that is not already live.
