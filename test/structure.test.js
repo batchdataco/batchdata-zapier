@@ -36,8 +36,13 @@ test('every module has labels, input fields with keys, and outputFields present 
       assert.ok(!keys.has(field.key), `${module.key} duplicate field ${field.key}`);
       keys.add(field.key);
     }
+    // Some modules return more than one record shape (Skip Trace V1 vs V3); each field must be in one of the samples.
+    const op = require('../lib/operations').operations.find((o) => o.key === module.key || `${o.key}_action` === module.key);
+    const { actionSample } = require('../lib/execute');
+    const extras = ((op && op.extraSamples) || []).map((extra) => (module.key.endsWith('_action') ? actionSample({ ...op, sample: extra }) : extra));
     for (const field of module.operation.outputFields) {
-      assert.notEqual(get(module.operation.sample, field.key), undefined, `${module.key} outputField ${field.key} not in sample`);
+      const found = [module.operation.sample, ...extras].some((sample) => get(sample, field.key) !== undefined);
+      assert.ok(found, `${module.key} outputField ${field.key} not in any sample`);
     }
     assert.ok(JSON.stringify(module.operation.sample).length < 5000, `${module.key} sample too large`);
   }

@@ -30,6 +30,13 @@ const handleErrors = (response, z) => {
       'The BatchData API token was rejected. Reconnect BatchData with a valid token.',
     );
   }
+  if (code === 402) {
+    throw new z.errors.Error(
+      `${detail || 'Your BatchData account balance is too low for this request.'} Add funds in your BatchData account, then retry. Contact ${SUPPORT_EMAIL} for help.`,
+      'InsufficientFunds',
+      402,
+    );
+  }
   if (code === 403) {
     throw new z.errors.Error(
       `${detail || 'Access denied.'} This token may not have access to this endpoint. Contact ${SUPPORT_EMAIL} for help.`,

@@ -48,7 +48,7 @@ test('search: dedicated field wins over JSON blob and callbacks are stripped', (
   assert.equal(body.searchCriteria.query, 'Tempe, AZ');
   assert.deepEqual(body.searchCriteria.building, { yearBuilt: { min: 1990 } });
   assert.ok(!JSON.stringify(body).includes('webhookUrl'));
-  assert.equal(body.options.take, 25);
+  assert.equal(body.options.take, 1); // billed search defaults to 1 (0.4.2)
 });
 
 test('search: validates take and JSON', () => {
