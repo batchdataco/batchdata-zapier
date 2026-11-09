@@ -1,17 +1,26 @@
 # Zapier public-review checklist: BatchData (app 248744)
 
-State as of **v0.4.0** (pushed to Zapier, private). Do **not** run `zapier-platform promote` or submit the Publish form until every item in section 2 is done.
+State as of **v0.4.1** (local; not yet pushed). v0.4.0 was submitted for public review Oct 29, 2026.
+
+## 0. Zapier review feedback (Abdullah U., partners@zapier.com, Nov 4, 2026; reminder Nov 7; ticket W614ZP-P52RM)
+
+Two items block approval:
+
+1. **Test account** for `integration-testing@zapier.com`: non-expiring, password Zapier support can change, every feature the modules use (incl. paid ones). Not code: see section 3. Still open.
+2. **Connection label**: the fallback returned `BatchData API token`. Fixed in v0.4.1 (`authentication.js`): fallback is now `API token` (short token) or `API token missing`; primary stays `Token ending XXXX`. Test added. Push 0.4.1, then reply in the ticket thread.
+
+The reminder says the ticket closes if there is no reply within a few days.
 
 ## 1. Already done in code / via CLI
 
 | Item | Status |
 |---|---|
 | `zapier-platform validate` | 16 checks passed, 0 failed, 0 publishing tasks, 2 general warnings. Both are T003 (date/time format needs a Zap) on the two native triggers `new_search_session` and `new_session_property`. They clear once each trigger has a successful live Zap (Zaps 27 and 28 below). |
-| `npm test` | 86 tests: 66 pass, 0 fail, 20 live tests skipped by default (`npm run test:live` runs them, billed). |
+| `npm test` | v0.4.1: 87 tests: 67 pass, 0 fail, 20 live tests skipped by default (`npm run test:live` runs them, billed). |
 | Property Monitor modules | Five modules hidden with `display.hidden: true` (`lib/modules.js`, `HIDDEN_MODULES`). Code kept intact. A test pins the hidden list and the visible count of 30. |
 | Inputs ending in `_id` | Have dynamic dropdowns (D004). |
 | Help text, trigger descriptions, sample data | On every module (samples/*.json). |
-| Connection label | "Token ending XXXX". The key is never shown in full. |
+| Connection label | "Token ending XXXX"; fallback "API token" / "API token missing" (no app name, per Zapier review). The key is never shown in full. |
 | Metadata set through `zapier-platform register` | Title, description, homepage, audience private, role employee, category sales-crm, no marketing emails. |
 | Logo | logo.png, 256x256 RGBA, uploaded with push. |
 | Customer email | support@batchservice.com only. |
