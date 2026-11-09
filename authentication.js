@@ -55,8 +55,10 @@ module.exports = {
   ],
   test,
   // The test response carries no account identity, so label by the token's last 4 characters.
+  // Zapier shows the app name beside every connection, so the label never repeats "BatchData".
   connectionLabel: (z, bundle) => {
-    const key = String((bundle.authData && bundle.authData.api_key) || '');
-    return key.length >= 8 ? `Token ending ${key.slice(-4)}` : 'BatchData API token';
+    const key = String((bundle.authData && bundle.authData.api_key) || '').trim();
+    if (!key) return 'API token missing';
+    return key.length >= 8 ? `Token ending ${key.slice(-4)}` : 'API token';
   },
 };
