@@ -74,7 +74,7 @@ test('permits: one record per permit with the property attached; address and fil
   assert.equal(calls[0].url, 'https://api.batchdata.com/api/v2/property/get-property-permits');
   assert.deepEqual(calls[0].body.request.allTags, { inList: ['solar', 'roofing'] });
   assert.equal(calls[0].body.request.issueDate.minDate, '2025-01-01');
-  assert.equal(calls[0].body.options.take, 25);
+  assert.equal(calls[0].body.options.take, 1); // billed search defaults to 1 (0.4.2)
 });
 
 test('investor buybox and properties map their envelopes', async () => {

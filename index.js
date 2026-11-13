@@ -4,7 +4,7 @@ const { version } = require('./package.json');
 const { version: platformVersion } = require('zapier-platform-core');
 
 const authentication = require('./authentication');
-const { addBearerToken, handleErrors } = require('./middleware');
+const { addBearerToken, handleErrors, setRequestTimeout } = require('./middleware');
 const { searches, creates, triggers } = require('./lib/modules');
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
   platformVersion,
   flags: { cleanInputData: false },
   authentication,
-  beforeRequest: [addBearerToken],
+  beforeRequest: [addBearerToken, setRequestTimeout],
   afterResponse: [handleErrors],
   triggers,
   searches,

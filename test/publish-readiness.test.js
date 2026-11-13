@@ -80,6 +80,17 @@ test('authentication has a label, help text with a link, and the connection labe
   assert.ok(!label.includes('abcdefgh'));
 });
 
+test('connection label fallbacks never include the app name (Zapier review, Nov 4 2026)', () => {
+  const label = (authData) => App.authentication.connectionLabel({}, { authData });
+  assert.equal(label({ api_key: 'abc' }), 'API token');
+  assert.equal(label({ api_key: '' }), 'API token missing');
+  assert.equal(label({}), 'API token missing');
+  assert.equal(App.authentication.connectionLabel({}, {}), 'API token missing');
+  for (const value of [label({ api_key: 'abc' }), label({}), label({ api_key: 'abcdefgh12345678' })]) {
+    assert.ok(!/batchdata/i.test(value), value);
+  }
+});
+
 test('property monitor modules are hidden and every other module is visible', () => {
   const app = require('../index');
   const hidden = [];

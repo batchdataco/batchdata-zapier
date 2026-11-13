@@ -4,7 +4,7 @@ Zapier integration for the [BatchData](https://batchdata.io) API. It covers prop
 
 Support: support@batchservice.com
 
-> **Status: v0.4.0, pushed to Zapier as a private integration (app 248744), not yet submitted for public review.** It passes `zapier-platform validate` with no errors or warnings and its local tests. Most operations were smoke-tested live; monitors and the instant trigger were not (see [What was and was not verified](#what-was-and-was-not-verified)).
+> **Status: v0.4.1 (connection-label fix from Zapier review, Nov 2026). v0.4.0 is on Zapier (app 248744) and in public review; 0.4.1 must be pushed before replying to the reviewer.** It passes `zapier-platform validate` with no errors or warnings and its local tests. Most operations were smoke-tested live; monitors and the instant trigger were not (see [What was and was not verified](#what-was-and-was-not-verified)).
 
 ![BatchData](logo.png)
 
@@ -87,6 +87,10 @@ Sends any `/api/...` request with the connected token. It refuses, before any ca
 - **Asynchronous endpoints.** Not exposed.
 - A **custom monitor webhook URL.** Only the trigger's own hook URL is ever used.
 
+## Changelog 0.4.3
+
+Every BatchData request now times out after 25 seconds with a clear "Timeout" error, before Zapier's 30-second task limit. The app does not retry a timed-out request automatically, because BatchData may have processed and billed it.
+
 ## Development
 
 ```bash
@@ -125,9 +129,9 @@ npx zapier-platform login               # interactive; or export ZAPIER_DEPLOY_K
 npx zapier-platform register "BatchData"   # first time only; creates .zapierapprc (commit it)
 npx zapier-platform validate
 npm test
-npx zapier-platform push                # uploads the version in package.json (0.4.0)
+npx zapier-platform push                # uploads the version in package.json (0.4.1)
 npx zapier-platform invite you@example.com   # optional: test with a few users first
-npx zapier-platform promote 0.4.0       # starts review for public listing
+npx zapier-platform promote 0.4.1       # starts review for public listing
 ```
 
 Before promoting: add a test account (a sandbox API token from app.batchdata.com, which returns mock data at no cost), and review the listing text in the Zapier editor. The icon is `logo.png` (256x256, from the official BatchData logo). The first push must use a version that is not already live.
