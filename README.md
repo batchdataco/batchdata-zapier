@@ -87,6 +87,10 @@ Sends any `/api/...` request with the connected token. It refuses, before any ca
 - **Asynchronous endpoints.** Not exposed.
 - A **custom monitor webhook URL.** Only the trigger's own hook URL is ever used.
 
+## Changelog 0.4.3
+
+Every BatchData request now times out after 25 seconds with a clear "Timeout" error, before Zapier's 30-second task limit. The app does not retry a timed-out request automatically, because BatchData may have processed and billed it.
+
 ## Development
 
 ```bash

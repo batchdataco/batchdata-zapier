@@ -1,6 +1,8 @@
 'use strict';
 
-const { SUPPORT_EMAIL } = require('./lib/constants');
+const constants = require('./lib/constants');
+
+const { SUPPORT_EMAIL } = constants;
 
 const addBearerToken = (request, z, bundle) => {
   const token = bundle.authData && bundle.authData.api_key;
@@ -9,6 +11,30 @@ const addBearerToken = (request, z, bundle) => {
     request.headers.Authorization = `Bearer ${token}`;
   }
   return request;
+};
+
+const setRequestTimeout = (request) => {
+  if (request.timeout === undefined) request.timeout = constants.REQUEST_TIMEOUT_MS;
+  // node-fetch restarts its timeout for the response body, so a signal enforces one total deadline.
+  if (request.signal === undefined) request.signal = AbortSignal.timeout(constants.REQUEST_TIMEOUT_MS);
+  return request;
+};
+
+const TIMEOUT_TYPES = new Set(['request-timeout', 'body-timeout', 'aborted']);
+
+// A timed-out call may have been processed and billed, so it is never retried automatically.
+const translateTimeouts = (perform) => async (z, bundle) => {
+  try {
+    return await perform(z, bundle);
+  } catch (error) {
+    if (!error || !TIMEOUT_TYPES.has(error.type)) throw error;
+    const seconds = Math.round(constants.REQUEST_TIMEOUT_MS / 1000);
+    throw new z.errors.Error(
+      `BatchData did not respond within ${seconds} seconds. The request may still have been processed (and billed); check your BatchData account before replaying this task. If this keeps happening, contact ${SUPPORT_EMAIL}.`,
+      'Timeout',
+      504,
+    );
+  }
 };
 
 const messageFrom = (response) => {
@@ -61,4 +87,4 @@ const handleErrors = (response, z) => {
   throw new z.errors.Error(detail || `BatchData returned HTTP ${code}.`, 'ApiError', code);
 };
 
-module.exports = { addBearerToken, handleErrors };
+module.exports = { addBearerToken, handleErrors, setRequestTimeout, translateTimeouts };

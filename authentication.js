@@ -1,6 +1,7 @@
 'use strict';
 
 const { API_HOST, SUPPORT_EMAIL } = require('./lib/constants');
+const { translateTimeouts } = require('./middleware');
 
 // The connection test posts an EMPTY address batch. A valid token gets HTTP 400
 // (empty batch rejected before any lookup). An invalid token gets 401 or 403.
@@ -53,7 +54,7 @@ module.exports = {
         'Create an API token in your BatchData account (BatchData dashboard > API). See [the BatchData developer docs](https://developer.batchdata.com). Use a token with access to the endpoints you plan to use. Each request is billed to your account.',
     },
   ],
-  test,
+  test: translateTimeouts(test),
   // The test response carries no account identity, so label by the token's last 4 characters.
   // Zapier shows the app name beside every connection, so the label never repeats "BatchData".
   connectionLabel: (z, bundle) => {
